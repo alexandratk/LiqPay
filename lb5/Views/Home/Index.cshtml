@@ -1,0 +1,59 @@
+﻿@model IEnumerable<lb5.Shop.Order>
+<script type="text/jscript">
+    window.addEventListener('DOMContentLoaded', () => {
+        function actionPlus(id: any) {
+            $.get("/Home/Plus?id=" + id);
+        };
+    })
+</script>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CurProduct.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurProduct.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurProduct.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurProduct.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AmountInOrder)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CurProduct.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CurProduct.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CurProduct.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CurProduct.Price)
+                </td>
+                <td>
+                    <a asp-action="MinusP" asp-route-id="@item.CurProduct.Id">-</a> | 
+                    @Html.DisplayFor(modelItem => item.AmountInOrder) |
+                    <a asp-action="PlusP" asp-route-id="@item.CurProduct.Id">+</a>
+                </td>
+                <td>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p>
+	<input type="button" value="Buy" onclick="location.href='@Url.Action("Privacy", "Home")'" />
+</p>
